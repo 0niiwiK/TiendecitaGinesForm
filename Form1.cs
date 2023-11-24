@@ -12,6 +12,7 @@ namespace TiendecitaGines
         private string ruta;
         private int num_boc_act;
         private byte[] imagenActual;
+        private string carpetaIncial = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
         public Form1()
         {
             InitializeComponent();
@@ -25,6 +26,8 @@ namespace TiendecitaGines
             btnAddImage.Visible = false;
             btnAddImage.Enabled = false;
             btnDelete.Enabled = false;
+            cbCalentito.Visible = false;
+            cbCalentar.Visible = false;
             DesactivarTextos();
             CargarDeArchivo();
         }
@@ -56,7 +59,9 @@ namespace TiendecitaGines
             txtProducto.Text = bocadillo_actual.Nombre;
             txtPrecio.Text = bocadillo_actual.Precio.ToString();
             txtStock.Text = bocadillo_actual.Stock.ToString();
-            cbCalentito.Checked = bocadillo_actual.Calentito;
+            cbCalentar.Visible = bocadillo_actual.Calentito;
+            cbCalentito.Visible = false;
+            cbCalentar.Checked = false;
             switch (bocadillo_actual.TipoPan)
             {
                 case 'A':
@@ -84,11 +89,7 @@ namespace TiendecitaGines
             if (num < lista_bocadillos.Count - 1) { btnNext.Enabled = true; }
             else { btnNext.Enabled = false; }
             btnImage.Enabled = true;
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+            btnDelete.Enabled = true;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -158,6 +159,9 @@ namespace TiendecitaGines
             btnImage.Visible = true;
             pbImage.Image = null;
             btnImage.Enabled = false;
+            cbCalentar.Visible = false;
+            cbCalentito.Visible = true;
+            cbCalentito.Checked = false;
             ActivarTextos();
             if (bocadillo_actual == null)
                 limpiarTextos();
@@ -233,6 +237,7 @@ namespace TiendecitaGines
         {
             //Get the path of specified file
             string filePath = openFileDialog1.FileName;
+            carpetaIncial = openFileDialog1.FileName;
 
             //Read the contents of the file into a stream
             var fileStream = openFileDialog1.OpenFile();
@@ -251,7 +256,7 @@ namespace TiendecitaGines
 
         private void btnImage_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            openFileDialog1.InitialDirectory = carpetaIncial;
             openFileDialog1.Filter = "Image files (*.png;*.bmp;*.jpg;*.jpeg)|*.png;*.bmp;*.jpg;*.jpeg|All files (*.*)|*.*";
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
@@ -300,7 +305,7 @@ namespace TiendecitaGines
 
         private void button1_Click(object sender, EventArgs e)
         {
-            openAddImage.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            openAddImage.InitialDirectory = carpetaIncial;
             openAddImage.Filter = "Image files (*.png;*.bmp;*.jpg;*.jpeg)|*.png;*.bmp;*.jpg;*.jpeg|All files (*.*)|*.*";
             openAddImage.FilterIndex = 1;
             openAddImage.RestoreDirectory = true;
@@ -312,6 +317,7 @@ namespace TiendecitaGines
         {
             //Get the path of specified file
             string filePath = openAddImage.FileName;
+            carpetaIncial = openAddImage.FileName;
 
             //Read the contents of the file into a stream
             var fileStream = openAddImage.OpenFile();
@@ -331,6 +337,14 @@ namespace TiendecitaGines
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             Program.GuardarBocadillos(lista_bocadillos, ruta);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbCalentar.Checked == true)
+                txtPrecio.Text = "" + (bocadillo_actual.Precio + 0.25);
+            else
+                txtPrecio.Text = "" + bocadillo_actual.Precio;
         }
     }
 }

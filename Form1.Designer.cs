@@ -51,6 +51,7 @@
             openFileDialog1 = new OpenFileDialog();
             btnAddImage = new Button();
             openAddImage = new OpenFileDialog();
+            cbCalentar = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pbImage).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtStock).BeginInit();
             SuspendLayout();
@@ -154,6 +155,7 @@
             pbImage.Location = new Point(651, 253);
             pbImage.Name = "pbImage";
             pbImage.Size = new Size(486, 382);
+            pbImage.SizeMode = PictureBoxSizeMode.StretchImage;
             pbImage.TabIndex = 11;
             pbImage.TabStop = false;
             // 
@@ -201,7 +203,7 @@
             btnPrev.Font = new Font("Segoe UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point);
             btnPrev.Location = new Point(36, 657);
             btnPrev.Name = "btnPrev";
-            btnPrev.Size = new Size(500, 64);
+            btnPrev.Size = new Size(482, 64);
             btnPrev.TabIndex = 15;
             btnPrev.Text = "⬅ Anterior";
             btnPrev.UseVisualStyleBackColor = true;
@@ -211,9 +213,9 @@
             // 
             btnNext.Anchor = AnchorStyles.None;
             btnNext.Font = new Font("Segoe UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point);
-            btnNext.Location = new Point(637, 657);
+            btnNext.Location = new Point(651, 657);
             btnNext.Name = "btnNext";
-            btnNext.Size = new Size(500, 64);
+            btnNext.Size = new Size(482, 64);
             btnNext.TabIndex = 16;
             btnNext.Text = "Siguiente ⮕";
             btnNext.UseVisualStyleBackColor = true;
@@ -222,13 +224,13 @@
             // txtNumBocadillos
             // 
             txtNumBocadillos.Anchor = AnchorStyles.None;
-            txtNumBocadillos.AutoSize = true;
-            txtNumBocadillos.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtNumBocadillos.Location = new Point(553, 668);
+            txtNumBocadillos.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            txtNumBocadillos.Location = new Point(524, 657);
             txtNumBocadillos.Name = "txtNumBocadillos";
-            txtNumBocadillos.Size = new Size(66, 45);
+            txtNumBocadillos.Size = new Size(119, 64);
             txtNumBocadillos.TabIndex = 17;
             txtNumBocadillos.Text = "0/0";
+            txtNumBocadillos.TextAlign = ContentAlignment.MiddleCenter;
             txtNumBocadillos.Click += txtNumBocadillos_Click;
             // 
             // btnSave
@@ -309,6 +311,18 @@
             // 
             openAddImage.FileOk += openAddImage_FileOk;
             // 
+            // cbCalentar
+            // 
+            cbCalentar.AutoSize = true;
+            cbCalentar.Font = new Font("Segoe UI", 13.875F, FontStyle.Regular, GraphicsUnit.Point);
+            cbCalentar.Location = new Point(369, 576);
+            cbCalentar.Name = "cbCalentar";
+            cbCalentar.Size = new Size(186, 54);
+            cbCalentar.TabIndex = 25;
+            cbCalentar.Text = "Caliente";
+            cbCalentar.UseVisualStyleBackColor = true;
+            cbCalentar.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -317,6 +331,7 @@
             AutoSizeMode = AutoSizeMode.GrowAndShrink;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1174, 829);
+            Controls.Add(cbCalentar);
             Controls.Add(btnAddImage);
             Controls.Add(btnSaveBocadillo);
             Controls.Add(combTipoPan);
@@ -342,7 +357,6 @@
             Name = "Form1";
             Text = "Form1";
             FormClosing += Form1_FormClosing;
-            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pbImage).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtStock).EndInit();
             ResumeLayout(false);
@@ -374,5 +388,6 @@
         private OpenFileDialog openFileDialog1;
         private Button btnAddImage;
         private OpenFileDialog openAddImage;
+        private CheckBox cbCalentar;
     }
 }
